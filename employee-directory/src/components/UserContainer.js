@@ -8,6 +8,7 @@ class UserContainer extends Component {
   state = {
     userData: [],
     search: ""
+    // maybe put the filter function here?
   };
 
   componentDidMount() {

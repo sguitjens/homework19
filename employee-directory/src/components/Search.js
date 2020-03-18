@@ -6,7 +6,7 @@ function Search(props) {
       <div>
         <h3>Search</h3>
         <input
-          onChange={props.onChange}
+          onChange={props.findUsers}// props.findUsers
           value={props.value}
           name="search"
           type="text"
