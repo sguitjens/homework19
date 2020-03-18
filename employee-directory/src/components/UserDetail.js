@@ -2,23 +2,23 @@ import React from "react";
 
 function UserDetail(props) {
   return (
-    <div className="row">
-      <div className="col-md-1">
+    <tr>
+      <td>
         <img alt={props.fullName} className="img-fluid" src={props.imgSrc} style={{ margin: "0 auto" }} />
-      </div>
-      <div className="col-md-3">
+      </td>
+      <td>
         <p>{props.fullName}</p>
-      </div>
-      <div className="col-md-2">
+      </td>
+      <td>
         <p>{props.phone}</p>
-      </div>
-      <div className="col-md-4">
+      </td>
+      <td>
         <p>{props.email}</p>
-      </div>
-      <div className="col-md-2">
+      </td>
+      <td>
         <p>{props.birthdate}</p>
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 }
 
