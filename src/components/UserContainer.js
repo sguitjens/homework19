@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Card from "./Card";
-import Search from "./Search";
+// import Search from "./Search";
 import UserDetail from "./UserDetail";
 import API from "../utils/API";
 
@@ -14,18 +14,17 @@ class UserContainer extends Component {
   componentDidMount() {
     API.search()
     .then(result => {
-      console.log("API CALL RESULT", result.data.results)
       this.setState({ userData: result.data.results })
     })
-    // .then(result => this.setState({ userData: result.data }))
     .catch(err => console.log(err));
   }
 
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
-    console.log("name:", name);
-    console.log("value:", value);
+    // console.log("name:", name);
+    // console.log("value:", value);
+    this.findUsers(value);
     this.setState({
       [name]: value
     });
@@ -33,9 +32,7 @@ class UserContainer extends Component {
 
   // this is only an ascending sort
   sortBy = colName => {
-    console.log("user data before sorting", this.state.userData);
     let userDataCopy = [...this.state.userData];
-    // this.state.userData.sort((a, b) => {
     userDataCopy.sort((a, b) => {
       let aCol;
       let bCol;
@@ -57,6 +54,7 @@ class UserContainer extends Component {
           aCol = a.dob.date;
           bCol = b.dob.date;
           break;
+        default: return console.log("nothing to sort");
       }
       
       if (aCol < bCol) {
@@ -67,27 +65,28 @@ class UserContainer extends Component {
       }
       return 0;
     })
-    console.log("user data copy (sorted now)", userDataCopy);
-    console.log("user data AFTER", this.state.userData);
     this.setState({userData: userDataCopy});
   }
 
   findUsers = str => {
-    console.log("str", str);
-
+    str = str.toUpperCase();
+    let userDataCopy = [...this.state.userData].filter(user => {
+      let fullname = user.name.first.toUpperCase() + " " + user.name.last.toUpperCase();
+      console.log("fullname", fullname);
+      return fullname.startsWith(str);
+    })
+    this.setState({userData: userDataCopy});
   }
 
   render() {
     return (
       <div className="container">
         <div>
-          <Card heading="Employees">
-            <Search className="card-body"
-              value={this.state.search}
-              name="search"
-              onChange={this.handleInputChange}
-            />
-          </Card>
+          <Card
+            heading="Employees"
+            search={this.state.search}
+            handleInputChange={this.handleInputChange}
+          />
           <table className="table">
             <thead>
               <tr>
