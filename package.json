@@ -3,7 +3,8 @@
   "description": "a list of employees that can be sorted and filtered",
   "version": "0.1.0",
   "engines": {
-    "node": "10.10.0"
+    "node": "10.10.0",
+    "npm": "6.x"
   },
   "private": true,
   "dependencies": {
