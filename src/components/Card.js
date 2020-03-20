@@ -2,7 +2,7 @@ import React from "react";
 import Search from "./Search"
 
 function Card(props) {
-  console.log("card props:", props);
+  // console.log("card props:", props);
   return (
     <div className="card text-center">
       <div className="card-header">

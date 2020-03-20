@@ -7,14 +7,14 @@ import API from "../utils/API";
 class UserContainer extends Component {
   state = {
     userData: [],
+    originalUserData: [],
     search: ""
-    // maybe put the filter function here?
   };
 
   componentDidMount() {
     API.search()
     .then(result => {
-      this.setState({ userData: result.data.results })
+      this.setState({ userData: result.data.results, originalUserData: result.data.results })
     })
     .catch(err => console.log(err));
   }
@@ -70,7 +70,7 @@ class UserContainer extends Component {
 
   findUsers = str => {
     str = str.toUpperCase();
-    let userDataCopy = [...this.state.userData].filter(user => {
+    let userDataCopy = [...this.state.originalUserData].filter(user => {
       let fullname = user.name.first.toUpperCase() + " " + user.name.last.toUpperCase();
       console.log("fullname", fullname);
       return fullname.startsWith(str);
